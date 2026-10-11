@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Smarrr</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+
+:root{
+  --bg:#070707; --ink:#eeeae3; --muted:#a7a19a; --line:rgba(255,255,255,.13);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink)}
+body{font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.10;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+}
+body:after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:19;
+  background:radial-gradient(circle at 50% 45%,transparent 35%,rgba(0,0,0,.7) 100%);
+}
+.page{display:none;min-height:100vh;position:relative}
+.page.active{display:block;animation:pageIn 1.1s cubic-bezier(.2,.8,.2,1)}
+@keyframes pageIn{from{opacity:0;transform:scale(1.015)}to{opacity:1;transform:scale(1)}}
+
+.hero{
+  min-height:100vh;display:grid;place-items:center;padding:8vh 7vw;position:relative;overflow:hidden;
+  background:
+   radial-gradient(circle at 50% 35%,rgba(130,115,95,.13),transparent 35%),
+   linear-gradient(110deg,#030303 0%,#11100f 48%,#050505 100%);
+}
+.hero:before{
+ content:"";position:absolute;width:75vw;height:75vw;border:1px solid rgba(255,255,255,.05);
+ border-radius:50%;filter:blur(1px);animation:slowSpin 35s linear infinite;
+}
+@keyframes slowSpin{to{transform:rotate(360deg)}}
+.hero-content{max-width:880px;text-align:center;position:relative;z-index:2}
+.kicker{letter-spacing:.42em;text-transform:uppercase;font-size:.66rem;color:#aaa39a;margin-bottom:26px}
+h1{
+ font-family:"Cormorant Garamond",serif;font-size:clamp(4.3rem,12vw,10rem);font-weight:500;
+ line-height:.78;margin:0 0 28px;letter-spacing:-.055em;
+ text-shadow:0 0 50px rgba(255,255,255,.08);
+}
+.date{font-family:"Cormorant Garamond",serif;font-size:1.2rem;color:#bcb5ad;margin-bottom:42px}
+.countdown{display:flex;justify-content:center;gap:clamp(15px,4vw,45px);margin:0 auto 48px}
+.unit{min-width:65px}.num{font-family:"Cormorant Garamond",serif;font-size:clamp(2rem,5vw,3.7rem);line-height:1}
+.label{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:#777;margin-top:8px}
+.cta{
+ border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.035);color:#eee;
+ padding:16px 28px;font-size:.67rem;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;
+ transition:.35s;backdrop-filter:blur(10px)
+}
+.cta:hover{background:#eee;color:#111;transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.scroll{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);font-size:.55rem;letter-spacing:.3em;color:#666;text-transform:uppercase}
+
+.particle{position:fixed;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.2;pointer-events:none;z-index:3;animation:float linear infinite}
+@keyframes float{0%{transform:translate3d(0,105vh,0) scale(.5);opacity:0}15%{opacity:.25}100%{transform:translate3d(var(--drift),-10vh,0) scale(1.2);opacity:0}}
+
+.memory-wrap{max-width:900px;margin:auto;padding:70px 7vw 110px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:80px}
+.back{color:#aaa;text-decoration:none;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+.back:hover{color:#fff}
+.memory-title{text-align:center;margin-bottom:90px}
+.memory-title .kicker{margin-bottom:20px}
+.memory-title h2{font:500 clamp(3.2rem,8vw,7rem)/.82 "Cormorant Garamond",serif;margin:0;letter-spacing:-.04em}
+.story{font:400 1.05rem/1.95 "Cormorant Garamond",serif;color:#d8d2ca}
+.story p{margin:0 0 30px}
+.story .break{margin:65px 0;text-align:center;color:#777;letter-spacing:.45em}
+.story .poem{font-style:italic;text-align:center;font-size:1.25rem;line-height:1.8;margin:65px auto;max-width:680px;color:#e9e2d9}
+.story .caps{font-family:Inter,sans-serif;font-size:.74rem;line-height:1.7;color:#8f8982;letter-spacing:.06em}
+.story h3{font:500 clamp(2rem,5vw,3.5rem)/1 "Cormorant Garamond",serif;text-align:center;margin:0 0 45px}
+.footer-note{text-align:center;color:#666;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;margin-top:90px}
+
+@media(max-width:600px){
+ .hero{padding:7vh 6vw}.countdown{gap:12px}.unit{min-width:55px}
+ .story{font-size:1rem;line-height:1.85}.memory-wrap{padding:40px 7vw 80px}
+}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<section id="home" class="page active">
+  <main class="hero">
+    <div class="hero-content">
+      <div class="kicker">October 12 · A day worth remembering</div>
+      <h1>Happy Birthday<br><em>Smarrr</em></h1>
+      <div class="date">The countdown has begun.</div>
+
+      <div class="countdown" aria-label="Countdown to October 12">
+        <div class="unit"><div id="days" class="num">00</div><div class="label">Days</div></div>
+        <div class="unit"><div id="hours" class="num">00</div><div class="label">Hours</div></div>
+        <div class="unit"><div id="mins" class="num">00</div><div class="label">Minutes</div></div>
+        <div class="unit"><div id="secs" class="num">00</div><div class="label">Seconds</div></div>
+      </div>
+
+      <button class="cta" onclick="showPage('memories')">Open the memories</button>
+    </div>
+    <div class="scroll">scroll · remember · feel</div>
+  </main>
+
+  <div class="memory-wrap" style="padding-top:90px">
+    <article class="story">
+      <p>Happy Birthday Smarrr! Hope you have a great birthday</p>
+      <p>Looking back, I realize how much of an idiot I was, and I hate how late this realization came.</p>
+      <p>I made so many mistakes. I let my own insecurities, stupid actions, and careless words hurt the person who mattered to me most. Instead of handling things with maturity, I reacted out of frustration and said things I can never take back. I took your patience for granted and failed to realize just how deeply my actions were affecting you until the damage was already done.</p>
+      <p>It tears me up inside knowing that I ruined something so pure. You deserved understanding, care, and total respect, but instead, I brought unnecessary pain into your life. Admitting I was wrong won’t erase what I did, but I carry the weight of those mistakes every single day.</p>
+      <p>I’m so sorry for being the reason you were hurt, and I wish more than anything that I had been smarter, kinder, and better for you when it mattered most. I took something off a person which was meant to be special and I am super sorry for it.</p>
+      <p>These are just a fraction of the things I have written for you. And I don't really want to send all of it to make you hate me more, not because i have written something bad about you which i could never but you would probably hate me cause i keep bringing up the past when you had already moved on wayyyyyyyyyyy long back.</p>
+      <p>Smarrr dont worry you will only have to see the person you hate the most for about 60 days. Like if I was you I would have made that person die in guilt for life. Like who likes a person who stole something that was meant to be special for you.</p>
+      <p>I don't know how you feel reading this, emotional, irritated, or maybe even happy. (god knows what you might be feeling). But whatever you are feeling just remember this idiot will never ever say bullshit about you, or do anything to hurt you negatively cause you know why this idiot still loves you a lott. Any ways this is it</p>
+      <p class="poem">“तिमी त्यो उज्यालो हौ, जसले मेरो अँध्यारो समयलाई पनि सहजै मेटाउन सक्यो”</p>
+      <p>I love you<br>not just because you loved me back,<br>but because you taught me so much about life<br>and showed me what real, genuine love actually feels like.</p>
+      <p>I love you<br>not for the pictures you used to send,<br>but for how you changed the way I see everything.<br>Even with the constant i gave you pain,<br>knowing you made me a better person,<br>and that’s why you’ll always mean the world to me.</p>
+      <p>Lekhna ta timro lagi kati lekhe kati but its still not enough to describe you.</p>
+      <p><strong>ANYWAYS ONCE AGAIN HAPPPPPPPIEST BIRTHDAY SMARRRRR!!!!!!</strong></p>
+    </article>
+  </div>
+</section>
+
+<section id="memories" class="page">
+  <div class="memory-wrap">
+    <div class="topbar"><span class="back" onclick="showPage('home')">← Back to birthday</span><span class="kicker" style="margin:0">01 / 01</span></div>
+    <header class="memory-title">
+      <div class="kicker">A memory I never forgot</div>
+      <h2>Good Memories</h2>
+    </header>
+
+    <article class="story">
+      <h3>IDK IF YOU WILL READ THIS OR NOT</h3>
+      <h3>EARRINGS, COFFEE AND 45 MINUTES OF HEAVEN</h3>
+
+      <p>It was 1st of february, a freezing, pitchblack morning, but my chest was buzzing with this crazy, electric excitement. It was the day of the World Scholar's Cup regional round.</p>
+      <p>Back then, I was still navigating the quiet wreck of a recent breakup. even though we had called it quits, we were trapped in this sweet, painful loop of talking every single day and night. a part of me was still desperately clinging to the hope that maybe, just maybe, we’d find our way back to each other.</p>
+      <p>That morning, we were supposed to be at school at 6:00 AM sharp to make the drive to premier school by 8:30. I remember pulling myself out of bed at 5, getting ready in the dark, and finishing by 5:30. But instead of leaving, I deliberately texted her saying I’d overslept and completely forgot about WSC a stupid, selfish little lie just so I could steal a few extra minutes in the warmth of talking with her.</p>
+      <p>Then I got to school. And that’s when everything changed.</p>
+      <p>Right there, standing in the morning chill, I saw her the most breathtaking girl I had ever laid eyes on. I still remember the way she looked so vividly. She was wearing these simple earrings a friend had gifted her, and in that single, fleeting moment, she left an indelible mark on my heart that I knew would never fade.</p>
+      <p>My teammates arrived, and soon enough, the school bus loaded up and headed out towards premier school. Out of 40 students split between two buses, fate put me and her on the exact same bus.</p>
+      <p>We finally pulled up to Premier and stepped out into the morning air, waiting around for a bit before going inside. I put my headphones on, letting the music drown out the noise around me, just watching her...</p>
+      <p class="caps">((I LOVE YOU SMARIKAAAAAA, I AM SO SO SORRY FOR ALL THE THINGS I TOLD YOU AND EVERYTHING I DID. I MISS YOU AND IT FREAKING HURTS)). (just me casually having a full breakdown mid-sentence).</p>
+      <p>Anyway... continuing from the headphones part, we reached Premier. But the second I stepped off the bus, I felt the ghostly presence of my ex hanging over me. Surprisingly though, it didn't even bother me that much anymore.</p>
+      <p>Then came the moment that changed everything. Rajbin walks up to me out of nowhere and asks if I wanted to patch up with her. (OMG I WAS LITERALLY OVER THE MOON). Without a single second thought, I said yes in that moment, I genuinely thought everything was falling back into place.</p>
+      <p>A bit later, Kamal sir came around to distribute our WSC ID cards. Once we got them, everyone was told to head over to the main hall for the opening ceremony. But me and my friends decided to grab some coffee first before heading inside.</p>
+      <p>By the time we walked into the hall with our coffees, we were dead last. The entire back was completely packed, so we were forced to go all the way down and sit right in the very front. Fate worked its magic, and Smarika and I ended up sitting side by side.</p>
+      <p><strong>And then... WE HELD HANDS FOR 45 MINUTES STRAIGHT.</strong></p>
+      <p>If anyone ever asks me for my final wish on this earth, I wouldn't ask for time or riches. I’d tell them I just want to pause the entire universe right there and trap myself in that exact moment to replay those 45 minutes on an endless loop forever, holding her hand while the rest of the world fades away.</p>
+
+      <p class="poem">A freezing, pitch-black morning,<br>my chest buzzing with electric heat.<br>Then the darkness cleared,<br>and there she was.<br>Standing in the chill,<br>simple earrings framing her face,<br>a gift from a friend,<br>making the cold world completely disappear.<br>No noise, no ghosts, no past left to fight<br>just breathtaking, effortless grace<br>holding the room without even trying.</p>
+
+      <p>When we got back, it was time for the Scholar's Challenge and Collaborative Writing. Even though our teams were separate, her team and my team were in the same area, and we chose to sit right next to each other again.</p>
+      <p>While we were sitting there, I noticed she was shivering from the cold. I had this sudden flash of hesitation, we were at an official school event, representing our school, and we both wanted to keep things on the low. If anyone from school caught her wearing my coat, it’d definitely raise eyebrows and spark rumors. But watching her sit there freezing, none of that warning noise in my head mattered anymore. I couldn't bear to see her cold, so I took off my coat and gave it to her anyway.</p>
+      <p>A moment later, my friend looked over and asked in Nepali, "Yo coat kasko ho?"</p>
+      <p>She looked right back and replied, "Mero."</p>
+      <p>Bro, just that one single word, claiming it as hers, completely melted my heartfelt right then and there.</p>
+      <p>And then we finished the event and returned back to school and from there we returned to our home.</p>
+
+      <div class="footer-note">Some moments are short. Some moments stay.</div>
+    </article>
+  </div>
+</section>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.replaceState(null,'','#'+id);
+}
+function nextBirthday(){
+  const now=new Date();
+  let target=new Date(now.getFullYear(),9,12,0,0,0);
+  if(target<=now) target=new Date(now.getFullYear()+1,9,12,0,0,0);
+  return target;
+}
+function updateCountdown(){
+  const diff=Math.max(0,nextBirthday()-new Date());
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor(diff/3600000)%24;
+  const m=Math.floor(diff/60000)%60;
+  const s=Math.floor(diff/1000)%60;
+  document.getElementById('days').textContent=String(d).padStart(2,'0');
+  document.getElementById('hours').textContent=String(h).padStart(2,'0');
+  document.getElementById('mins').textContent=String(m).padStart(2,'0');
+  document.getElementById('secs').textContent=String(s).padStart(2,'0');
+}
+setInterval(updateCountdown,1000); updateCountdown();
+
+const particles=document.getElementById('particles');
+for(let i=0;i<65;i++){
+  const p=document.createElement('span');p.className='particle';
+  p.style.left=Math.random()*100+'vw';
+  p.style.setProperty('--drift',(Math.random()*160-80)+'px');
+  p.style.animationDuration=(10+Math.random()*18)+'s';
+  p.style.animationDelay=(-Math.random()*25)+'s';
+  p.style.width=p.style.height=(Math.random()<.8?1:2)+'px';
+  particles.appendChild(p);
+}
+if(location.hash==='#memories') showPage('memories');
+</script>
+</body>
+</html>
